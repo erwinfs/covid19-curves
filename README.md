@@ -12,3 +12,4 @@ The offset (or lag) and factor are determined by brute force:
 It is the combination that produces the lowest squared error.
 
 ![Graph of predicted deaths based on earlier new cases](cases-deaths.png)
+.
