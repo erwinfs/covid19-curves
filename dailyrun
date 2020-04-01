@@ -1,0 +1,6 @@
+#!/bin/bash
+python3 ./src/download-uk-data.py
+python3 ./src/curvefit.py
+git add .
+git commit -m "Daily run"
+git push
