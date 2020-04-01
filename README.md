@@ -12,7 +12,9 @@ The offset (or lag) and factor are determined by brute force:
 It is the combination that produces the lowest squared error.
 
 ![Graph of predicted deaths based on earlier new cases](cases-deaths.png)
-.
+
+Output details:
+---------------
 Exponential function coefficients for new cases:
 [0.68559076 1.1502348 ]
 Covariance of coefficients:
