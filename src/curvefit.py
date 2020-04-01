@@ -101,7 +101,7 @@ def main():
     Days, DailyCases, DailyDeaths, pDays = prep_data()
 
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
-    print("Exponential funcion coefficients for new cases:")
+    print("Exponential function coefficients for new cases:")
     print(CasesParam)
     print("Covariance of coefficients:")
     print(CasesParam_cov)
@@ -118,7 +118,7 @@ def main():
     plt.close()
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
-    print("Exponential funcion coefficients for daily deaths:")
+    print("Exponential function coefficients for daily deaths:")
     print(DeathsParam)
     print("Covariance of coefficients:")
     print(DeathsParam_cov)
