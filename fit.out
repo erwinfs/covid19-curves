@@ -1,0 +1,14 @@
+Exponential funcion coefficients for new cases:
+[0.95109109 1.14326537]
+Covariance of coefficients:
+[[ 1.38858858e-01 -2.87893532e-03]
+ [-2.87893532e-03  5.99365977e-05]]
+Exponential funcion coefficients for daily deaths:
+[1.10399983e-03 1.23000970e+00]
+Covariance of coefficients:
+[[ 8.42414355e-07 -1.58681804e-05]
+ [-1.58681804e-05  2.99394718e-04]]
+Best offset and factor
+10 34%
+Average Error
+19.23
