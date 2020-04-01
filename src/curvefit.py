@@ -114,7 +114,7 @@ def main():
     plt.ylabel("Cases")
     plt.xlabel("Days since 31 january 2020")
     plt.savefig("cases.png")
-    plt.show()
+    #plt.show()
     plt.close()
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
@@ -130,7 +130,7 @@ def main():
     plt.ylabel("Deaths")
     plt.xlabel("Days since 31 january 2020")
     plt.savefig("deaths.png")
-    plt.show()
+    #plt.show()
     plt.close()
 
     # Estimate best offset and factor to use new daily cases as
@@ -153,7 +153,7 @@ def main():
     plt.ylabel("Deaths")
     plt.xlabel("Days since 31 january 2020")
     plt.savefig("cases-deaths.png")
-    plt.show()
+    #plt.show()
     plt.close()
 
 if __name__ == '__main__':
