@@ -103,10 +103,10 @@ def main():
     Days, DailyCases, DailyDeaths, pDays = prep_data()
 
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
-    print("Exponential function coefficients for new cases:")
-    print(CasesParam)
-    print("Covariance of coefficients:")
-    print(CasesParam_cov)
+    print("Exponential function coefficients for new cases:<br/> ")
+    print(CasesParam, "<br/>")
+    print("Covariance of coefficients:<br/> ")
+    print(CasesParam_cov, "<br/><br/>" )
 
     # Plot results
     plt.title("Exponential curve fit to UK reported daily cases")
@@ -120,10 +120,10 @@ def main():
     plt.close()
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
-    print("Exponential function coefficients for daily deaths:")
-    print(DeathsParam)
-    print("Covariance of coefficients:")
-    print(DeathsParam_cov)
+    print("Exponential function coefficients for daily deaths:<br/> ")
+    print(DeathsParam, "<br/> ")
+    print("Covariance of coefficients:<br/> ")
+    print(DeathsParam_cov, "<br/> <br/> ")
 
     plt.title("Exponential curve fit to UK reported daily deaths")
     plt.plot(Days, DailyDeaths, '-', color ='black', label ="Daily deaths")
@@ -138,10 +138,10 @@ def main():
     # Estimate best offset and factor to use new daily cases as
     # predictor for deaths
     DeathsAns, offset, fact, error = offset_fit(DailyCases, DailyDeaths, Days, pDays)
-    print("Best offset and factor")
-    print (offset, "{:,.0f}%".format(fact *100))
+    print("Best offset and factor<br/> ")
+    print (offset, "{:,.0f}% <br/> ".format(fact *100))
     #print(bestOffset, bestFact)
-    print("Average Error")
+    print("Average Error<br/> ")
     print("{:,.2f}".format(error))
 
     # Plot results
