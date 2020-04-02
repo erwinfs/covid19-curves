@@ -105,9 +105,9 @@ def main():
 
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
     print("<h3>Exponential function coefficients for new cases:</h3>")
-    print(CasesParam, "<br/>")
-    print("<h3>Covariance of coefficients:</h3>")
-    print(CasesParam_cov, "<br/>" )
+    print(CasesParam,)
+    print("<h4>Covariance of coefficients:</h4>")
+    print(CasesParam_cov)
 
     # Plot results
     plt.title("Exponential curve fit to UK reported daily cases")
@@ -122,8 +122,8 @@ def main():
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
     print("<h3>Exponential function coefficients for daily deaths:</h3>")
-    print(DeathsParam, "<br/> ")
-    print("<h3>Covariance of coefficients:</h3>")
+    print(DeathsParam,)
+    print("<h4>Covariance of coefficients:</h4>")
     print(DeathsParam_cov, "<br/>")
 
     plt.title("Exponential curve fit to UK reported daily deaths")
@@ -140,9 +140,9 @@ def main():
     # predictor for deaths
     DeathsAns, offset, fact, error = offset_fit(DailyCases, DailyDeaths, Days, pDays)
     print("<h3>Best offset and factor for third graph</h3>")
-    print (offset, "{:,.0f}% <br/> ".format(fact *100))
+    print (offset, "{:,.0f}%".format(fact *100))
     #print(bestOffset, bestFact)
-    print("<h3>Average Error</h3>")
+    print("<h4>Average Error</h4>")
     print("{:,.2f}".format(error))
 
     # Plot results
