@@ -54,7 +54,8 @@ def offset_fit(DailyCases, DailyDeaths, Days, pDays):
             # with deaths
             for i in range(offset, noDays):
                 PredictedDeaths[i] = DailyCases[i-offset] * fact
-                # Calculate square of error
+                # Calculate  of error, sq gives less stable results due to
+                # exponential nature of data
                 # error += abs(PredictedDeaths[i] - DailyDeaths[i])**2
                 error += abs(PredictedDeaths[i] - DailyDeaths[i])
             if error < lowestError:
@@ -103,9 +104,9 @@ def main():
     Days, DailyCases, DailyDeaths, pDays = prep_data()
 
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
-    print("Exponential function coefficients for new cases:<br/> ")
+    print("h2Exponential function coefficients for new cases:<br/> ")
     print(CasesParam, "<br/>")
-    print("Covariance of coefficients:<br/> ")
+    print("h2Covariance of coefficients:<br/> ")
     print(CasesParam_cov, "<br/><br/>" )
 
     # Plot results
@@ -120,9 +121,9 @@ def main():
     plt.close()
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
-    print("Exponential function coefficients for daily deaths:<br/> ")
+    print("h2Exponential function coefficients for daily deaths:<br/> ")
     print(DeathsParam, "<br/> ")
-    print("Covariance of coefficients:<br/> ")
+    print("h2Covariance of coefficients:<br/> ")
     print(DeathsParam_cov, "<br/> <br/> ")
 
     plt.title("Exponential curve fit to UK reported daily deaths")
@@ -138,10 +139,10 @@ def main():
     # Estimate best offset and factor to use new daily cases as
     # predictor for deaths
     DeathsAns, offset, fact, error = offset_fit(DailyCases, DailyDeaths, Days, pDays)
-    print("Best offset and factor<br/> ")
+    print("h2Best offset and factor<br/> ")
     print (offset, "{:,.0f}% <br/> ".format(fact *100))
     #print(bestOffset, bestFact)
-    print("Average Error<br/> ")
+    print("h2Average Error<br/> ")
     print("{:,.2f}".format(error))
 
     # Plot results

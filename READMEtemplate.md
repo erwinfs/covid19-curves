@@ -13,5 +13,5 @@ It is the combination that produces the lowest error.
 
 ![Graph of predicted deaths based on earlier new cases](cases-deaths.png)
 
-Output details:
----------------
+Output Details
+--------------
