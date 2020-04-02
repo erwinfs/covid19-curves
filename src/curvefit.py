@@ -104,9 +104,9 @@ def main():
     Days, DailyCases, DailyDeaths, pDays = prep_data()
 
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
-    print("<h3>Exponential function coefficients for new cases:</h3>")
+    print("<h3>Exponential function coefficients for new cases</h3>")
     print(CasesParam,)
-    print("<h4>Covariance of coefficients:</h4>")
+    print("<h4>Covariance of coefficients</h4>")
     print(CasesParam_cov)
 
     # Plot results
@@ -121,9 +121,9 @@ def main():
     plt.close()
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
-    print("<h3>Exponential function coefficients for daily deaths:</h3>")
+    print("<h3>Exponential function coefficients for daily deaths</h3>")
     print(DeathsParam,)
-    print("<h4>Covariance of coefficients:</h4>")
+    print("<h4>Covariance of coefficients</h4>")
     print(DeathsParam_cov, "<br/>")
 
     plt.title("Exponential curve fit to UK reported daily deaths")
