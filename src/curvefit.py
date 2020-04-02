@@ -55,7 +55,8 @@ def offset_fit(DailyCases, DailyDeaths, Days, pDays):
             for i in range(offset, noDays):
                 PredictedDeaths[i] = DailyCases[i-offset] * fact
                 # Calculate square of error
-                error += abs(PredictedDeaths[i] - DailyDeaths[i])**2
+                # error += abs(PredictedDeaths[i] - DailyDeaths[i])**2
+                error += abs(PredictedDeaths[i] - DailyDeaths[i])
             if error < lowestError:
                 lowestError = error
                 bestOffset = offset
@@ -70,7 +71,8 @@ def offset_fit(DailyCases, DailyDeaths, Days, pDays):
     for i in range(bestOffset, noDays + prediction):
         DeathsAns[i] = DailyCases[i-bestOffset] * bestFact
 
-    error = np.sqrt(lowestError/(noDays-bestOffset))
+    # error = np.sqrt(lowestError/(noDays-bestOffset))
+    error = lowestError/(noDays-bestOffset)
     return DeathsAns, bestOffset, bestFact, error
 
 # Read data from Excel spreadsheet and map it into lists

@@ -9,6 +9,6 @@ Covariance of coefficients:
 [[ 7.66788961e-09 -2.34440786e-06]
  [-2.34440786e-06  7.17525515e-04]]
 Best offset and factor
-5 20%
+7 25%
 Average Error
-46.31
+27.05

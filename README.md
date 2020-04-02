@@ -9,7 +9,7 @@ official UK COVID-19 data that is released daily.
 The following graph shows how the daily cases, offset by the stated number of days,
 and  multiplied by the factor (%), map against actual deaths reported.
 The offset (or lag) and factor are determined by brute force:
-It is the combination that produces the lowest squared error.
+It is the combination that produces the lowest error.
 
 ![Graph of predicted deaths based on earlier new cases](cases-deaths.png)
 
@@ -26,6 +26,6 @@ Covariance of coefficients:
 [[ 7.66788961e-09 -2.34440786e-06]
  [-2.34440786e-06  7.17525515e-04]]
 Best offset and factor
-5 20%
+7 25%
 Average Error
-46.31
+27.05
