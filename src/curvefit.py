@@ -1,6 +1,8 @@
 
 import numpy as np
 import pandas as pd
+import datetime
+from datetime import timedelta
 from scipy.optimize import curve_fit # curve-fit() function imported from scipy
 from matplotlib import pyplot as plt
 
@@ -102,6 +104,12 @@ def prep_data():
 def main():
     # Read data from input file and create lists
     Days, DailyCases, DailyDeaths, pDays = prep_data()
+
+    # legDates = [datetime.date(2020, 1, 31)] * len(pDays)
+    # #legDates[0] = datetime.date(2020, 1, 31)
+    # for i in range (1, len(pDays)):
+    #     legDates[i] = legDates[i-1] + timedelta(days=1)
+    # print (legDates)
 
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
     print("<h3>Exponential function coefficients for new cases</h3>")

@@ -1,7 +1,7 @@
 #!/bin/bash
 # python3 ./src/download-uk-data.py
-python3 ./src/curvefit.py > fit.out
-cat READMEtemplate.md fit.out > README.md
+python3 ./src/curvefit.py > fit.md
+cat READMEtemplate.md fit.md > README.md
 git add .
 git commit -m "Daily run"
 git push
