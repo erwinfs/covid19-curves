@@ -110,14 +110,17 @@ def main():
     print(CasesParam_cov)
 
     # Plot results
-    plt.title("Exponential curve fit to UK reported daily cases")
+    plotTitle = "Exponential curve fit to UK reported daily cases"
+    plt.title(plotTitle)
     plt.plot(Days, DailyCases, '-', color ='red', label ="Daily cases")
     plt.plot(pDays, CasesAns, '--', color ='blue', label ="Predicted cases")
     plt.legend()
     plt.ylabel("Daily Cases")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("cases.png")
-    plt.set_yscale('log')
+    plt.yscale('log')
+    plt.title(plotTitle + "\n(logarithmic y-scale)")
+    plt.ylabel("Daily Cases (log)")
     plt.savefig("cases-log.png")
     #plt.show()
     plt.close()
@@ -128,13 +131,18 @@ def main():
     print("<h4>Covariance of coefficients</h4>")
     print(DeathsParam_cov, "<br/>")
 
-    plt.title("Exponential curve fit to UK reported daily deaths")
+    plotTitle = "Exponential curve fit to UK reported daily deaths"
+    plt.title(plotTitle)
     plt.plot(Days, DailyDeaths, '-', color ='black', label ="Daily deaths")
     plt.plot(pDays, DeathsAns, '--', color ='grey', label ="Predicted deaths")
     plt.legend()
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("deaths.png")
+    plt.yscale('log')
+    plt.title(plotTitle + "\n(logarithmic y-scale)")
+    plt.ylabel("Daily Deaths (log)")
+    plt.savefig("deaths-log.png")
     #plt.show()
     plt.close()
 
