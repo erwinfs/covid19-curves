@@ -117,6 +117,8 @@ def main():
     plt.ylabel("Daily Cases")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("cases.png")
+    plt.set_yscale('log')
+    plt.savefig("cases-log.png")
     #plt.show()
     plt.close()
 
