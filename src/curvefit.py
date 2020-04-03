@@ -14,6 +14,7 @@ LARGENUMBER = 9999999999.9 # Large starting number for error
 
 
 # Parameters
+fileName = "./data/DailyConfirmedCases.xlsx"
 prediction = 5 #  Number of days to predict for
 # Factor and offset ranges withing which to seek optimum
 factLow = 0.2
@@ -81,7 +82,7 @@ def offset_fit(DailyCases, DailyDeaths, Days, pDays):
 # Read data from Excel spreadsheet and map it into lists
 def prep_data():
     # Create a dataframe from xlsx
-    df = pd.read_excel('DailyConfirmedCases.xlsx')
+    df = pd.read_excel(fileName)
 
     Dates = df["DateVal"].values.tolist()
     Days = [d/EXCELDTFACT - EXCELDTOFFSET for d in Dates] #convert dates to day number
@@ -105,12 +106,6 @@ def main():
     # Read data from input file and create lists
     Days, DailyCases, DailyDeaths, pDays = prep_data()
 
-    # legDates = [datetime.date(2020, 1, 31)] * len(pDays)
-    # #legDates[0] = datetime.date(2020, 1, 31)
-    # for i in range (1, len(pDays)):
-    #     legDates[i] = legDates[i-1] + timedelta(days=1)
-    # print (legDates)
-
     CasesAns, CasesParam, CasesParam_cov = exp_fit(DailyCases, Days, pDays)
     print("<h3>Exponential function coefficients for new cases</h3>")
     print(CasesParam,)
@@ -129,7 +124,7 @@ def main():
     plt.yscale('log')
     plt.title(plotTitle + "\n(logarithmic y-scale)")
     plt.ylabel("Daily Cases (log)")
-    plt.savefig("cases-log.png")
+    plt.savefig("./out/cases-log.png")
     #plt.show()
     plt.close()
 
@@ -150,7 +145,7 @@ def main():
     plt.yscale('log')
     plt.title(plotTitle + "\n(logarithmic y-scale)")
     plt.ylabel("Daily Deaths (log)")
-    plt.savefig("deaths-log.png")
+    plt.savefig("./out/deaths-log.png")
     #plt.show()
     plt.close()
 
@@ -173,7 +168,7 @@ def main():
     plt.legend()
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
-    plt.savefig("cases-deaths.png")
+    plt.savefig("./out/cases-deaths.png")
     #plt.show()
     plt.close()
 
