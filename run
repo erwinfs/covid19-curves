@@ -1,5 +1,5 @@
 #!/bin/bash
-# python3 ./src/download-uk-data.py
+python3 ./src/download-uk-data.py
 python3 ./src/curvefit.py > ./out/fit.md
 cat ./src/READMEtemplate.md ./out/fit.md > README.md
 git add .
