@@ -1,3 +1,6 @@
+# This script tests when the date/time stamp on the input file changes
+# and executes the run script when a new version is detected
+
 import paho.mqtt.client as mqtt
 import os
 
@@ -5,7 +8,7 @@ cmd = "./run"
 MQTThost = "broker.stanford-clark.com"
 MQTTport = 1885
 MQTTkeepalive = 60
-MQTTtopic = "UK/#"
+MQTTtopic = "COVID-19/UK/#"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
