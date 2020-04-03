@@ -1,11 +1,11 @@
 import paho.mqtt.client as mqtt
 import os
 
-cmd = "cat ./run"
-MQTThost = "mqtt.eclipse.org"
-MQTTport = 1883
+cmd = "./run"
+MQTThost = "broker.stanford-clark.com"
+MQTTport = 1885
 MQTTkeepalive = 60
-MQTTtopic = "$SYS/#"
+MQTTtopic = "UK/#"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
