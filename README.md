@@ -5,15 +5,15 @@ official UK COVID-19 data that is released daily here: <https://www.arcgis.com/h
 
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
-![Graph of actual cases and exponential deaths](./outdeaths.png)
-![Graph of actual cases and exponential deaths](./outdeaths-log.png)
+![Graph of actual cases and exponential deaths](./out/deaths.png)
+![Graph of actual cases and exponential deaths](./out/deaths-log.png)
 
 The following graph shows how the daily cases, offset by the stated number of days,
 and  multiplied by the factor (%), mapped against actual deaths reported.
 The offset (or lag) and factor are determined by brute force:
 It is the combination that produces the lowest error.
 
-![Graph of predicted deaths based on earlier new cases](./outcases-deaths.png)
+![Graph of predicted deaths based on earlier new cases](./out/cases-deaths.png)
 
 Output Details
 --------------
