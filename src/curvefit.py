@@ -172,7 +172,7 @@ def main():
     #plt.show()
     plt.close()
 
-    print("<br /> *Last updated ", datetime.datetime.now(), "*")
+    print("<br /><br />*Last updated*", datetime.datetime.now())
 
 if __name__ == '__main__':
     main()
