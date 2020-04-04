@@ -12,4 +12,4 @@
 7 26%
 <h4>Average Error</h4>
 14.09
-<br /><br />*Last updated* 2020-04-04 17:08:22.514616
+<br /><br />_Last updated on 2020-04-04 17:11:52.135043_
