@@ -6,13 +6,15 @@ official UK COVID-19 data that is released daily here: <https://www.arcgis.com/h
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
 
-The following graph shows the doubling time for new cases (up is good)
+The following graph shows the doubling time for new cases (up is good).
+This is calculated by fitting an exponential curve up to the each date
+and calculating the doubling time from the growth rate.
 ![Graph of actual cases and exponential curve](./out/casesdt.png)
 
 ![Graph of actual cases and exponential deaths](./out/deaths.png)
 ![Graph of actual cases and exponential deaths](./out/deaths-log.png)
 
-The following graph shows the doubling time for deaths (up is good)
+The following graph shows the doubling time for deaths (up is good).
 ![Graph of actual cases and exponential curve](./out/deathsdt.png)
 
 The following graph shows how the daily cases, offset by the stated number of days,
