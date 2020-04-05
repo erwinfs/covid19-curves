@@ -10,7 +10,8 @@ from matplotlib import pyplot as plt
 DAYOFFSET = 43860 #Excel date for start of the data 31 Jan 2020 for CSV
 EXCELDTFACT = 24*60*60*1000000000 # Excel date format conversion factor
 EXCELDTOFFSET = 18291 # Excel date for start of the data 31 Jan 2020
-LARGENUMBER = 9999999999.9 # Large starting number for error
+LARGENUMBER = 9999999999.9 # Large starting number for err
+pltStart = 45 # Day to start plot at
 
 
 # Parameters
@@ -22,6 +23,8 @@ factHigh = 0.4
 factIncrement = 0.01
 offsetLow = 5
 offsetHigh = 15
+pltStart = 45 # Day to start plot at
+doublingTimeStart = 50  # Day to start doubliong time calc and plot
 
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
@@ -38,6 +41,17 @@ def exp_fit(DailyCases, Days, pDays):
     # the coefficients given by curve-fit() function
     Ans = (Param[0]*Param[1]**pDays)
     return Ans, Param, Param_cov
+
+def doubling_time(DailyCases, Days):
+    dt = [0.0] * len(Days)
+    for i in range(doublingTimeStart-1,len(Days)):
+        cases = DailyCases[0:i]
+        caseDays = Days[0:i]
+        #Ans, Param, Param_cov = exp_fit(cases, caseDays, pDays)
+        Param, Param_cov = curve_fit(test, caseDays, cases)
+        dt[i] = np.log(2)/np.log(Param[1])
+    return dt
+
 
 # Test assumption that on average a fraction of people who were diagnosed
 # an "offset" number of days ealier, die.
@@ -118,6 +132,7 @@ def main():
     plt.plot(Days, DailyCases, '-', color ='red', label ="Daily cases")
     plt.plot(pDays, CasesAns, '--', color ='blue', label ="Predicted cases")
     plt.legend()
+    plt.xlim([pltStart, len(pDays)])
     plt.ylabel("Daily Cases")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("./out/cases.png")
@@ -126,6 +141,17 @@ def main():
     plt.ylabel("Daily Cases (log)")
     plt.savefig("./out/cases-log.png")
     #plt.show()
+    plt.close()
+
+    dt = doubling_time(DailyCases, Days)
+    plotTitle = "Doubling time for UK reported daily cases"
+    plt.title(plotTitle)
+    plt.plot(Days, dt, '-', color ='red', label ="Doubling time")
+    plt.legend()
+    plt.xlim([doublingTimeStart, len(Days)])
+    plt.ylabel("Doubling time")
+    plt.xlabel("Days since 31 January 2020")
+    plt.savefig("./out/casesdt.png")
     plt.close()
 
     DeathsAns, DeathsParam, DeathsParam_cov = exp_fit(DailyDeaths, Days, pDays)
@@ -139,6 +165,7 @@ def main():
     plt.plot(Days, DailyDeaths, '-', color ='black', label ="Daily deaths")
     plt.plot(pDays, DeathsAns, '--', color ='grey', label ="Predicted deaths")
     plt.legend()
+    plt.xlim([pltStart, len(pDays)])
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("./out/deaths.png")
@@ -147,6 +174,17 @@ def main():
     plt.ylabel("Daily Deaths (log)")
     plt.savefig("./out/deaths-log.png")
     #plt.show()
+    plt.close()
+
+    dt = doubling_time(DailyDeaths, Days)
+    plotTitle = "Doubling time for UK reported daily deaths"
+    plt.title(plotTitle)
+    plt.plot(Days, dt, '-', color ='black', label ="Doubling time")
+    plt.legend()
+    plt.xlim([doublingTimeStart, len(Days)])
+    plt.ylabel("Doubling time")
+    plt.xlabel("Days since 31 January 2020")
+    plt.savefig("./out/deathsdt.png")
     plt.close()
 
     # Estimate best offset and factor to use new daily cases as
@@ -166,6 +204,7 @@ def main():
     plt.plot(Days, DailyDeaths, '-', color ='black', label ="Daily deaths")
     plt.plot(pDays, DeathsAns, '--', color ='grey', label ="Predicted deaths")
     plt.legend()
+    plt.xlim([pltStart, len(pDays)])
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("./out/cases-deaths.png")
