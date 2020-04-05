@@ -12,7 +12,7 @@ The following graph shows the doubling time for new cases (up is good)
 ![Graph of actual cases and exponential deaths](./out/deaths.png)
 ![Graph of actual cases and exponential deaths](./out/deaths-log.png)
 
-The following graph shows the doubling time for new cases (up is good)
+The following graph shows the doubling time for deaths (up is good)
 ![Graph of actual cases and exponential curve](./out/deathsdt.png)
 
 The following graph shows how the daily cases, offset by the stated number of days,
