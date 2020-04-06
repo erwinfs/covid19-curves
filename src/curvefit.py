@@ -43,10 +43,11 @@ def exp_fit(DailyCases, Days, pDays):
     return Ans, Param, Param_cov
 
 def doubling_time(DailyCases, Days):
+    print (Days)
     dt = [0.0] * len(Days)
     for i in range(doublingTimeStart-1,len(Days)):
-        cases = DailyCases[0:i]
-        caseDays = Days[0:i]
+        cases = DailyCases[0:i+1]
+        caseDays = Days[0:i+1]
         #Ans, Param, Param_cov = exp_fit(cases, caseDays, pDays)
         Param, Param_cov = curve_fit(test, caseDays, cases)
         dt[i] = np.log(2)/np.log(Param[1])
