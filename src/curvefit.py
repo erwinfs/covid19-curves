@@ -17,7 +17,7 @@ LARGENUMBER = 9999999999.9 # Large starting number for err
 data_input_fname = "./data/DailyConfirmedCases.xlsx"
 output_fname = "./out/fit.md"
 #  Number of days to predict for
-prediction = 5
+prediction = 7
 # Factor and offset ranges withing which to seek optimum
 fact_low = 0.2
 fact_high = 0.4
@@ -85,10 +85,12 @@ def offset_fit(daily_cases, daily_deaths, days, predicted_days):
             fact += fact_increment
         #endwhile
     #endfor
+    # Make sure that prediction range does not exceed offset
+    offset_prediction = min(prediction, best_offset)
     # ans stores the new y-data according to
     # the coefficients given by curve-fit() function
     deaths_ans = [0.0] * (no_days + prediction)
-    for i in range(best_offset, no_days + prediction):
+    for i in range(best_offset, no_days + offset_prediction):
         deaths_ans[i] = daily_cases[i-best_offset] * best_fact
 
     # error = np.sqrt(lowest_error/(no_days-best_ffset))
@@ -142,6 +144,7 @@ def main():
     plt.plot(predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
     plt.legend()
+    plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Cases")
     plt.xlabel("Days since 31 January 2020")
@@ -159,6 +162,7 @@ def main():
     plt.title(plot_title)
     plt.plot(days, dt, '-', color ='red', label ="Doubling time")
     plt.legend()
+    plt.grid(True)
     plt.xlim([doubling_time_start, len(days)])
     plt.ylabel("Doubling time in Days")
     plt.xlabel("Days since 31 January 2020")
@@ -180,6 +184,7 @@ def main():
     plt.plot(predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.legend()
+    plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
@@ -197,6 +202,7 @@ def main():
     plt.title(plot_title)
     plt.plot(days, dt, '-', color ='black', label ="Doubling time")
     plt.legend()
+    plt.grid(True)
     plt.xlim([doubling_time_start, len(days)])
     plt.ylabel("Doubling time in Days")
     plt.xlabel("Days since 31 January 2020")
@@ -223,6 +229,7 @@ def main():
     plt.plot(predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.legend()
+    plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
