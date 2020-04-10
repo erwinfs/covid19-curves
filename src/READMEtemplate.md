@@ -3,6 +3,9 @@
 This project contains some Python code that fits exponential curves to
 official UK COVID-19 data that is released daily here: <https://www.arcgis.com/home/item.html?id=e5fd11150d274bebaaf8fe2a7a2bda11>
 
+Also note the provisos stated here:
+<https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public#number-of-cases-and-deaths>
+
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
 
