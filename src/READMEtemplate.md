@@ -5,6 +5,7 @@ official UK COVID-19 data that is released daily here: <https://www.arcgis.com/h
 
 Also note the provisos stated here:
 <https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public#number-of-cases-and-deaths>
+Since 10 April positive tests also include key workers and their hoseholds (not just prople that have been hospitalised).
 
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)

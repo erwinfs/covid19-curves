@@ -5,6 +5,7 @@ official UK COVID-19 data that is released daily here: <https://www.arcgis.com/h
 
 Also note the provisos stated here:
 <https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public#number-of-cases-and-deaths>
+Since 10 April positive tests also include key workers and their hoseholds (not just prople that have been hospitalised).
 
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
@@ -30,17 +31,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Exponential function coefficients for new cases</h3>
-[44.80057409  1.06819314]
+[49.72357156  1.06622483]
 <h4>Covariance of coefficients</h4>
-[[ 2.36817628e+02 -8.33088774e-02]
- [-8.33088774e-02  2.96802463e-05]]
+[[ 2.62045750e+02 -8.19066828e-02]
+ [-8.19066828e-02  2.59383960e-05]]
 <h3>Exponential function coefficients for daily deaths</h3>
-[1.49388781 1.09285326]
+[2.18837634 1.08602649]
 <h4>Covariance of coefficients</h4>
-[[ 4.61121879e-01 -4.86903992e-03]
- [-4.86903992e-03  5.17555648e-05]] <br/>
+[[ 9.31793334e-01 -6.60897375e-03]
+ [-6.60897375e-03  4.72317412e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
-6 20%
+7 22%
 <h4>Average Error</h4>
-32.15
-<br /><br />Last updated on 2020-04-13 17:23:57.274703
+33.15
+<br /><br />Last updated on 2020-04-14 15:23:04.315061
