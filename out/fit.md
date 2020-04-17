@@ -1,15 +1,15 @@
 <h3>Exponential function coefficients for new cases</h3>
-[78.95987674  1.05744989]
+[87.75482099  1.05545171]
 <h4>Covariance of coefficients</h4>
-[[ 6.59016527e+02 -1.26581674e-01]
- [-1.26581674e-01  2.47218664e-05]]
+[[ 7.53657139e+02 -1.28610846e-01]
+ [-1.28610846e-01  2.23337354e-05]]
 <h3>Exponential function coefficients for daily deaths</h3>
-[3.82515295 1.07609575]
+[4.76438189 1.0722312 ]
 <h4>Covariance of coefficients</h4>
-[[ 2.42771450e+00 -9.57140082e-03]
- [-9.57140082e-03  3.80858416e-05]] <br/>
+[[ 3.44945558e+00 -1.07739747e-02]
+ [-1.07739747e-02  3.39900217e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
-7 21%
+6 20%
 <h4>Average Error</h4>
-39.69
-<br /><br />Last updated on 2020-04-16 15:29:50.579618
+39.86
+<br /><br />Last updated on 2020-04-17 14:16:57.757849
