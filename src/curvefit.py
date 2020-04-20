@@ -26,8 +26,13 @@ offset_low = 5
 offset_high = 15
 # Day to start plot at
 plt_start = 45
+# Maximum cases to show on plot
+max_cases_plt = 9000
 # Day to start doubliong time calc and plot
 doubling_time_start = 50  # Day to start doubliong time calc and plot
+# Parameters for baseline exponential new cases curve roughly a week after
+# lockdown was announced
+bl_cases_param = [0.08139621,1.19780593]
 
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
@@ -42,8 +47,8 @@ def exp_fit(cases, days, predicted_days):
 
     # ans stores the new y-data according to
     # the coefficients given by curve-fit() function
-    Ans = (param[0]*param[1]**predicted_days)
-    return Ans, param, param_cov
+    ans = (param[0]*param[1]**predicted_days)
+    return ans, param, param_cov
 
 def doubling_time(cases, days):
     dt = [0.0] * len(days)
@@ -54,6 +59,7 @@ def doubling_time(cases, days):
         #Ans, param, param_cov = exp_fit(cases, caseDays, predicted_days)
         param, param_cov = curve_fit(test, iteration_days, iteration_cases)
         dt[i] = np.log(2)/np.log(param[1])
+        #print(i, param)
     return dt
 
 # Test assumption that on average a fraction of people who were diagnosed
@@ -131,11 +137,14 @@ def main():
     print("Fit curve to diagnosed cases ...")
     cases_ans, cases_param, cases_param_cov = exp_fit(daily_cases, days,
                                                         predicted_days)
+    print(bl_cases_param)
+    bl_cases_ans = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
     print("<h3>Exponential function coefficients for new cases</h3>",
           file=f_out)
     print(cases_param, file=f_out)
     print("<h4>Covariance of coefficients</h4>", file=f_out)
     print(cases_param_cov, file=f_out)
+    print("Baline parameters:", bl_cases_param)
 
     # Plot results
     plot_title = "Exponential curve fit to UK reported daily cases"
@@ -143,17 +152,35 @@ def main():
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
     plt.plot(predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
+    plt.plot(predicted_days, bl_cases_ans, '--', color ='green',
+             label="Predicted cases baseline curve fitted on day 56")
+    plt.legend()
+    plt.grid(True)
+    plt.xlim([plt_start, len(predicted_days)])
+    plt.ylim(0, max_cases_plt)
+    plt.ylabel("Daily Cases")
+    plt.xlabel("Days since 31 January 2020")
+    plt.savefig("./out/cases.png")
+    #plt.show()
+    plt.close()
+
+    plot_title = "Exponential curve fit to UK reported daily cases"
+    plt.title(plot_title)
+    plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
+    plt.plot(predicted_days, cases_ans, '--', color ='blue',
+             label="Predicted cases")
+    plt.plot(predicted_days, bl_cases_ans, '--', color ='green',
+             label="Predicted cases baseline curve fitted on day 56")
     plt.legend()
     plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Cases")
     plt.xlabel("Days since 31 January 2020")
-    plt.savefig("./out/cases.png")
-    plt.yscale('log')
     plt.title(plot_title + "\n(logarithmic y-scale)")
+    plt.yscale('log')
     plt.ylabel("Daily Cases (log)")
     plt.savefig("./out/cases-log.png")
-    #plt.show()
+    plt.show()
     plt.close()
 
     print("Calculate doubling times for new cases...")
