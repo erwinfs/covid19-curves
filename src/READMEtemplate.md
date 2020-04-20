@@ -8,6 +8,9 @@ The spreadsheet here does not seem to be public anymore. <https://www.arcgis.com
 Since 10 April positive tests have been divided into pillars. This data set only uses Pillar 1 -  just people that have been hospitalised and most critical key workers,
 this ensures consistency with the previous data and is a better indicator for
 the last graph.
+A green line has been added, this shows the exponential curve calculated using
+the data up to day 56, about a week after lockdown. This estimates what would 
+have happened without intervention.
 
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
