@@ -28,11 +28,13 @@ offset_high = 15
 plt_start = 45
 # Maximum cases to show on plot
 max_cases_plt = 9000
+max_deaths_plt = 1000
 # Day to start doubliong time calc and plot
 doubling_time_start = 50  # Day to start doubliong time calc and plot
 # Parameters for baseline exponential new cases curve roughly a week after
 # lockdown was announced
-bl_cases_param = [0.08139621,1.19780593]
+bl_cases_param = [0.08139621, 1.19780593]
+bl_deaths_param = [5.44821942e-04, 1.24617849]
 
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
@@ -138,7 +140,7 @@ def main():
     cases_ans, cases_param, cases_param_cov = exp_fit(daily_cases, days,
                                                         predicted_days)
     print(bl_cases_param)
-    bl_cases_ans = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
+    bl_cases = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
     print("<h3>Exponential function coefficients for new cases</h3>",
           file=f_out)
     print(cases_param, file=f_out)
@@ -152,7 +154,7 @@ def main():
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
     plt.plot(predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
-    plt.plot(predicted_days, bl_cases_ans, '--', color ='green',
+    plt.plot(predicted_days, bl_cases, '--', color ='green',
              label="Predicted cases baseline curve fitted on day 56")
     plt.legend()
     plt.grid(True)
@@ -165,22 +167,21 @@ def main():
     plt.close()
 
     plot_title = "Exponential curve fit to UK reported daily cases"
+    plot_title + "\n(logarithmic y-scale)"
     plt.title(plot_title)
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
     plt.plot(predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
-    plt.plot(predicted_days, bl_cases_ans, '--', color ='green',
+    plt.plot(predicted_days, bl_cases, '--', color ='green',
              label="Predicted cases baseline curve fitted on day 56")
     plt.legend()
     plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
-    plt.ylabel("Daily Cases")
     plt.xlabel("Days since 31 January 2020")
-    plt.title(plot_title + "\n(logarithmic y-scale)")
     plt.yscale('log')
     plt.ylabel("Daily Cases (log)")
     plt.savefig("./out/cases-log.png")
-    plt.show()
+    #plt.show()
     plt.close()
 
     print("Calculate doubling times for new cases...")
@@ -196,9 +197,11 @@ def main():
     plt.savefig("./out/casesdt.png")
     plt.close()
 
+    # Deaths curve fit and plots
     print("Fit curve to new deaths ...")
     deaths_ans, deaths_param, deaths_param_cov = exp_fit(daily_deaths, days,
                                                           predicted_days)
+    bl_deaths=(bl_deaths_param[0]*bl_deaths_param[1]**np.array(predicted_days))
     print("<h3>Exponential function coefficients for daily deaths</h3>",
           file=f_out)
     print(deaths_param,file=f_out)
@@ -210,14 +213,31 @@ def main():
     plt.plot(days, daily_deaths, '-', color ='black', label ="Daily deaths")
     plt.plot(predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
+    plt.plot(predicted_days, bl_deaths, '--', color ='green',
+             label="Predicted deaths baseline curve fitted on day 63")
     plt.legend()
     plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
+    plt.ylim(0, max_deaths_plt)
     plt.ylabel("Daily Deaths")
     plt.xlabel("Days since 31 January 2020")
     plt.savefig("./out/deaths.png")
+    plt.close()
+
+
+    # Deaths with log y-scale
+    plot_title = "Exponential curve fit to UK reported daily deaths"
+    plot_title += "\n(logarithmic y-scale)"
+    plt.title(plot_title)
+    plt.plot(days, daily_deaths, '-', color ='black', label ="Daily deaths")
+    plt.plot(predicted_days, deaths_ans, '--', color ='grey',
+             label ="Predicted deaths")
+    plt.plot(predicted_days, bl_deaths, '--', color ='green',
+             label="Predicted deaths baseline curve fitted on day 63")
     plt.yscale('log')
-    plt.title(plot_title + "\n(logarithmic y-scale)")
+    plt.legend()
+    plt.grid(True)
+    plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Deaths (log)")
     plt.savefig("./out/deaths-log.png")
     #plt.show()
