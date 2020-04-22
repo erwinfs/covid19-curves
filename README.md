@@ -3,8 +3,6 @@
 This project contains some Python code that fits exponential curves to
 official UK COVID-19 data that is released daily here: https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
-The spreadsheet here does not seem to be public anymore. <https://www.arcgis.com/home/item.html?id=e5fd11150d274bebaaf8fe2a7a2bda11>
-
 Since 10 April positive tests have been divided into pillars. This data set only uses Pillar 1 -  just people that have been hospitalised and most critical key workers,
 this ensures consistency with the previous data and is a better indicator for
 the last graph.
@@ -40,17 +38,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Exponential function coefficients for new cases</h3>
-[149.27500985   1.04544945]
+[165.17356707   1.04352639]
 <h4>Covariance of coefficients</h4>
-[[ 1.96419656e+03 -1.88385258e-01]
- [-1.88385258e-01  1.85011444e-05]]
+[[ 2.31848076e+03 -1.98788962e-01]
+ [-1.98788962e-01  1.74798405e-05]]
 <h3>Exponential function coefficients for daily deaths</h3>
-[12.17693807  1.05570224]
+[13.87331627  1.05339416]
 <h4>Covariance of coefficients</h4>
-[[ 2.14680003e+01 -2.50140828e-02]
- [-2.50140828e-02  2.96021773e-05]] <br/>
+[[ 2.59666837e+01 -2.62531290e-02]
+ [-2.62531290e-02  2.69854151e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
 6 20%
 <h4>Average Error</h4>
-45.50
-<br /><br />Last updated on 2020-04-21 16:53:13.016211
+45.10
+<br /><br />Last updated on 2020-04-22 15:01:33.569209
