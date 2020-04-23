@@ -48,7 +48,7 @@ Output Details
 [[ 3.54416252e+01 -2.98932568e-02]
  [-2.98932568e-02  2.56768872e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
-6 20%
+6 19%
 <h4>Average Error</h4>
-48.61
-<br /><br />Last updated on 2020-04-23 15:31:57.879332
+46.51
+<br /><br />Last updated on 2020-04-23 16:39:00.469782

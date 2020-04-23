@@ -57,7 +57,7 @@ def exp_fit(cases, days, predicted_days):
     ans = (param[0]*param[1]**predicted_days)
     return ans, param, param_cov
 
- curve_fit() function takes the test-function
+#curve_fit() function takes the test-function
 # x-data and y-data as argument and returns
 # the coefficients a and b in param and
 # the estimated covariance of param in param_cov
