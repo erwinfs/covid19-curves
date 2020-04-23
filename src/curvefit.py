@@ -19,7 +19,7 @@ output_fname = "./out/fit.md"
 #  Number of days to predict for
 prediction = 7
 # Factor and offset ranges withing which to seek optimum
-fact_low = 0.2
+fact_low = 0.1
 fact_high = 0.4
 fact_increment = 0.01
 offset_low = 5
@@ -35,10 +35,15 @@ doubling_time_start = 50  # Day to start doubliong time calc and plot
 # lockdown was announced
 bl_cases_param = [0.08139621, 1.19780593]
 bl_deaths_param = [5.44821942e-04, 1.24617849]
-
+# start day for line fit
+cased_ln_start = 65
+death_ln_start = 72
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
     return a*b**x
+
+def ln_test(x,a,b):
+    return a + b * x
 
 # curve_fit() function takes the test-function
 # x-data and y-data as argument and returns
@@ -50,6 +55,18 @@ def exp_fit(cases, days, predicted_days):
     # ans stores the new y-data according to
     # the coefficients given by curve-fit() function
     ans = (param[0]*param[1]**predicted_days)
+    return ans, param, param_cov
+
+ curve_fit() function takes the test-function
+# x-data and y-data as argument and returns
+# the coefficients a and b in param and
+# the estimated covariance of param in param_cov
+def line_fit(cases, days, predicted_days):
+    param, param_cov = curve_fit(ln_test, days, cases)
+
+    # ans stores the new y-data according to
+    # the coefficients given by curve-fit() function
+    ans = (param[0]+param[1]*predicted_days)
     return ans, param, param_cov
 
 def doubling_time(cases, days):
