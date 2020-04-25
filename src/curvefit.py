@@ -22,8 +22,8 @@ prediction = 7
 fact_low = 0.1
 fact_high = 0.4
 fact_increment = 0.01
-offset_low = 5
-offset_high = 15
+offset_low = 4
+offset_high = 20
 # Day to start plot at
 plt_start = 45
 # Maximum cases to show on plot
@@ -101,8 +101,8 @@ def offset_fit(daily_cases, daily_deaths, days, predicted_days):
                 predicted_deaths[i] = daily_cases[i-offset] * fact
                 # Calculate  of error, sq gives less stable results due to
                 # exponential nature of data
-                # error += abs(predicted_deaths[i] - daily_deaths[i])**2
-                error += abs(predicted_deaths[i] - daily_deaths[i])
+                error += abs(predicted_deaths[i] - daily_deaths[i])**2
+                # error += abs(predicted_deaths[i] - daily_deaths[i])
             if error < lowest_error:
                 lowest_error = error
                 best_offset = offset
@@ -118,8 +118,8 @@ def offset_fit(daily_cases, daily_deaths, days, predicted_days):
     for i in range(best_offset, no_days + offset_prediction):
         deaths_ans[i] = daily_cases[i-best_offset] * best_fact
 
-    # error = np.sqrt(lowest_error/(no_days-best_ffset))
-    error = lowest_error/(no_days-best_offset)
+    error = np.sqrt(lowest_error/(no_days-best_offset))
+    # error = lowest_error/(no_days-best_offset)
     return deaths_ans, best_offset, best_fact, error
 
 # Read data from Excel spreadsheet and map it into lists
