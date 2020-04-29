@@ -18,6 +18,7 @@ This is calculated by fitting an exponential curve up to the each date
 and calculating the doubling time from the growth rate.
 ![Graph of actual cases and exponential curve](./out/casesdt.png)
 
+These graphs only show hospital deaths.
 A green line has been added, this shows the exponential curve calculated using
 the data up to day 63, about a two weeks after lockdown. This estimates what  
 would have happened without intervention.
