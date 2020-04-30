@@ -3,6 +3,9 @@
 This project contains some Python code that fits exponential curves to
 official UK COVID-19 data that is released daily here: https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
+The curves are becoming less relevant every day as the data is fortunately not
+following an exponential curve any more.
+
 Since 10 April positive tests have been divided into pillars. This data set only uses Pillar 1 -  just people that have been hospitalised and most critical key workers,
 this ensures consistency with the previous data and is a better indicator for
 the last graph.
@@ -39,17 +42,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Exponential function coefficients for new cases</h3>
-[314.10132057   1.03113375]
+[330.837146     1.03009346]
 <h4>Covariance of coefficients</h4>
-[[ 7.71357802e+03 -3.26065814e-01]
- [-3.26065814e-01  1.43614263e-05]]
+[[ 8.29039441e+03 -3.29465862e-01]
+ [-3.29465862e-01  1.36661850e-05]]
 <h3>Exponential function coefficients for daily deaths</h3>
-[33.8911233  1.0374035]
+[35.88304285  1.03636135]
 <h4>Covariance of coefficients</h4>
-[[ 1.28380510e+02 -4.95929141e-02]
- [-4.95929141e-02  1.97208823e-05]] <br/>
+[[ 1.36214446e+02 -4.91972709e-02]
+ [-4.91972709e-02  1.83094614e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
 6 18%
 <h4>Average Error</h4>
-97.04
-<br /><br />Last updated on 2020-04-29 17:25:05.901365
+96.49
+<br /><br />Last updated on 2020-04-30 20:50:04.841034
