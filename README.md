@@ -21,7 +21,7 @@ This is calculated by fitting an exponential curve up to the each date
 and calculating the doubling time from the growth rate.
 ![Graph of actual cases and exponential curve](./out/casesdt.png)
 
-These graphs only show hospital deaths.
+These graphs now show all deaths.
 A green line has been added, this shows the exponential curve calculated using
 the data up to day 63, about a two weeks after lockdown. This estimates what  
 would have happened without intervention.
@@ -42,17 +42,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Exponential function coefficients for new cases</h3>
-[330.837146     1.03009346]
+[347.38477877   1.02911688]
 <h4>Covariance of coefficients</h4>
-[[ 8.29039441e+03 -3.29465862e-01]
- [-3.29465862e-01  1.36661850e-05]]
+[[ 8.85017827e+03 -3.31844663e-01]
+ [-3.31844663e-01  1.30095964e-05]]
 <h3>Exponential function coefficients for daily deaths</h3>
-[35.88304285  1.03636135]
+[37.44585981  1.03558881]
 <h4>Covariance of coefficients</h4>
-[[ 1.36214446e+02 -4.91972709e-02]
- [-4.91972709e-02  1.83094614e-05]] <br/>
+[[ 1.39994382e+02 -4.79181054e-02]
+ [-4.79181054e-02  1.69114207e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
 6 18%
 <h4>Average Error</h4>
-96.49
-<br /><br />Last updated on 2020-04-30 20:50:04.841034
+96.46
+<br /><br />Last updated on 2020-05-02 08:47:38.306238
