@@ -42,17 +42,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Exponential function coefficients for new cases</h3>
-[363.19926896   1.02820225]
+[366.09101199   1.02806669]
 <h4>Covariance of coefficients</h4>
-[[ 9.49594033e+03 -3.37974297e-01]
- [-3.37974297e-01  1.25959386e-05]]
+[[ 9.58685842e+03 -3.38137378e-01]
+ [-3.38137378e-01  1.24955343e-05]]
 <h3>Exponential function coefficients for daily deaths</h3>
-[39.46494477  1.03462115]
+[39.96228902  1.03441938]
 <h4>Covariance of coefficients</h4>
-[[ 1.50071016e+02 -4.83394774e-02]
- [-4.83394774e-02  1.60681838e-05]] <br/>
+[[ 1.52284481e+02 -4.84033481e-02]
+ [-4.84033481e-02  1.58846518e-05]] <br/>
 <h3>Best offset and factor for third graph</h3>
 6 18%
 <h4>Average Error</h4>
 97.04
-<br /><br />Last updated on 2020-05-02 17:17:20.705269
+<br /><br />Last updated on 2020-05-02 17:18:25.494367
