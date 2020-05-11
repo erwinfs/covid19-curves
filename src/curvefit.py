@@ -170,15 +170,15 @@ def main():
                                                         ln_predicted_days)
     print(bl_cases_param)
     bl_cases = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
-    print("<h3>Exponential function coefficients for new cases</h3>",
+    print("<h3>Line coefficients for new cases</h3>",
           file=f_out)
     print(cases_param, file=f_out)
     print("<h4>Covariance of coefficients</h4>", file=f_out)
     print(cases_param_cov, file=f_out)
-    print("Baline parameters:", bl_cases_param)
+    print("Baseline parameters:", bl_cases_param)
 
     # Plot results
-    plot_title = "Exponential curve fit to UK reported daily cases"
+    plot_title = "Line fit to UK reported daily cases"
     plt.title(plot_title)
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
     plt.plot(ln_predicted_days, cases_ans, '--', color ='blue',
@@ -240,7 +240,7 @@ def main():
 
 
     bl_deaths=(bl_deaths_param[0]*bl_deaths_param[1]**np.array(predicted_days))
-    print("<h3>Exponential function coefficients for daily deaths</h3>",
+    print("<h3>Fit coefficients for daily deaths</h3>",
           file=f_out)
     print(deaths_param,file=f_out)
     print("<h4>Covariance of coefficients</h4>", file=f_out)
