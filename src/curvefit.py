@@ -67,11 +67,8 @@ def line_fit(cases, days, predicted_days):
 
     # ans stores the new y-data according to
     # the coefficients given by curve-fit() function
-    print(param)
-    # ans = (param[0]+param[1]*predicted_days)
-    ans = [0.0] * len(predicted_days)
-    for i in range(len(predicted_days)):
-        ans[i] = param[0]+param[1]*predicted_days[i]
+    line_calc = lambda x: param[0]+param[1]*x
+    ans = np.array([line_calc(i) for i in predicted_days])
     return ans, param, param_cov
 
 def doubling_time(cases, days):
