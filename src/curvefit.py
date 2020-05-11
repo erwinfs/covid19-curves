@@ -14,7 +14,7 @@ EXCELDTOFFSET = 18291 # Excel date for start of the data 31 Jan 2020
 LARGENUMBER = 9999999999.9 # Large starting number for err
 
 # Parameters
-data_input_fname = "./data/DailyConfirmedCases.xlsx"
+data_input_fname = "./data/DailyConfirmedCasesMA.xlsx"
 output_fname = "./out/fit.md"
 #  Number of days to predict for
 prediction = 6
@@ -31,13 +31,14 @@ max_cases_plt = 9000
 max_deaths_plt = 1000
 # Day to start doubliong time calc and plot
 doubling_time_start = 50  # Day to start doubliong time calc and plot
-# Parameters for baseline exponential new cases curve roughly a week after
-# lockdown was announced
-bl_cases_param = [0.08139621, 1.19780593]
-bl_deaths_param = [5.44821942e-04, 1.24617849]
+# Parameters for baseline exponential new cases curve on 7 day moving average
+# at peak day (65)
+bl_cases_param = [0.69071121, 1.14232115]
+# Day 71, peak of deaths (and 6 days after peak of new cases)
+bl_deaths_param = [0.05535172, 1.14603189]
 # start day for line fit
-cased_ln_start = 65
-death_ln_start = 72
+cases_ln_start = 65
+deaths_ln_start = 72
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
     return a*b**x
@@ -66,7 +67,11 @@ def line_fit(cases, days, predicted_days):
 
     # ans stores the new y-data according to
     # the coefficients given by curve-fit() function
-    ans = (param[0]+param[1]*predicted_days)
+    print(param)
+    # ans = (param[0]+param[1]*predicted_days)
+    ans = [0.0] * len(predicted_days)
+    for i in range(len(predicted_days)):
+        ans[i] = param[0]+param[1]*predicted_days[i]
     return ans, param, param_cov
 
 def doubling_time(cases, days):
@@ -131,10 +136,10 @@ def prep_data():
     #convert dates to day number
     days = [d/EXCELDTFACT - EXCELDTOFFSET for d in Dates]
 
-    daily_cases = df["CMODateCount"].values.tolist()
+    daily_cases = df["CMODateCountMA"].values.tolist()
     daily_cases = np.nan_to_num(daily_cases)      #Replace NaNs with 0
 
-    daily_deaths = df["DailyDeaths"].values.tolist()
+    daily_deaths = df["DailyDeathsMA"].values.tolist()
     daily_deaths = np.nan_to_num(daily_deaths)    #Replace NaNs with 0
 
     # Create a new list for days that estimate is to be calculated for
@@ -153,9 +158,16 @@ def main():
     print("Read data ...")
     days, daily_cases, daily_deaths, predicted_days = prep_data()
 
-    print("Fit curve to diagnosed cases ...")
-    cases_ans, cases_param, cases_param_cov = exp_fit(daily_cases, days,
-                                                        predicted_days)
+    # Switched from exp curve fit to line fit from peak onwards
+    # print("Fit curve to diagnosed cases ...")
+    # cases_ans, cases_param, cases_param_cov = exp_fit(daily_cases, days,
+    #                                                     predicted_days)
+    print("Fit line to diagnosed cases ...")
+    ln_cases = daily_cases[cases_ln_start:]
+    ln_days = days[cases_ln_start:]
+    ln_predicted_days = predicted_days[cases_ln_start:]
+    cases_ans, cases_param, cases_param_cov = line_fit(ln_cases, ln_days,
+                                                        ln_predicted_days)
     print(bl_cases_param)
     bl_cases = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
     print("<h3>Exponential function coefficients for new cases</h3>",
@@ -169,7 +181,7 @@ def main():
     plot_title = "Exponential curve fit to UK reported daily cases"
     plt.title(plot_title)
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
-    plt.plot(predicted_days, cases_ans, '--', color ='blue',
+    plt.plot(ln_predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
     plt.plot(predicted_days, bl_cases, '--', color ='green',
              label="Predicted cases baseline curve fitted on day 56")
@@ -183,14 +195,14 @@ def main():
     #plt.show()
     plt.close()
 
-    plot_title = "Exponential curve fit to UK reported daily cases"
+    plot_title = "Line fit to UK reported daily cases"
     plot_title + "\n(logarithmic y-scale)"
     plt.title(plot_title)
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
-    plt.plot(predicted_days, cases_ans, '--', color ='blue',
+    plt.plot(ln_predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
     plt.plot(predicted_days, bl_cases, '--', color ='green',
-             label="Predicted cases baseline curve fitted on day 56")
+             label="Predicted cases baseline curve fitted on day 65")
     plt.legend()
     plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
@@ -201,23 +213,32 @@ def main():
     #plt.show()
     plt.close()
 
-    print("Calculate doubling times for new cases...")
-    dt = doubling_time(daily_cases, days)
-    plot_title = "Doubling time for UK reported daily cases"
-    plt.title(plot_title)
-    plt.plot(days, dt, '-', color ='red', label ="Doubling time")
-    plt.legend()
-    plt.grid(True)
-    plt.xlim([doubling_time_start, len(days)])
-    plt.ylabel("Doubling time in Days")
-    plt.xlabel("Days since 31 January 2020")
-    plt.savefig("./out/casesdt.png")
-    plt.close()
+    # Doubling time is no longer relevant
+    # print("Calculate doubling times for new cases...")
+    # dt = doubling_time(daily_cases, days)
+    # plot_title = "Doubling time for UK reported daily cases"
+    # plt.title(plot_title)
+    # plt.plot(days, dt, '-', color ='red', label ="Doubling time")
+    # plt.legend()
+    # plt.grid(True)
+    # plt.xlim([doubling_time_start, len(days)])
+    # plt.ylabel("Doubling time in Days")
+    # plt.xlabel("Days since 31 January 2020")
+    # plt.savefig("./out/casesdt.png")
+    # plt.close()
 
-    # Deaths curve fit and plots
-    print("Fit curve to new deaths ...")
-    deaths_ans, deaths_param, deaths_param_cov = exp_fit(daily_deaths, days,
-                                                          predicted_days)
+    # Deaths curve fit and plots - use line from peak day
+    # print("Fit curve to new deaths ...")
+    # deaths_ans, deaths_param, deaths_param_cov = exp_fit(daily_deaths, days,
+    #                                                       predicted_days)
+    print("Fit line to deaths ...")
+    ln_deaths = daily_deaths[deaths_ln_start:]
+    ln_days = days[deaths_ln_start:]
+    ln_predicted_days = predicted_days[deaths_ln_start:]
+    deaths_ans, deaths_param, deaths_param_cov = line_fit(ln_deaths, ln_days,
+                                                    ln_predicted_days)
+
+
     bl_deaths=(bl_deaths_param[0]*bl_deaths_param[1]**np.array(predicted_days))
     print("<h3>Exponential function coefficients for daily deaths</h3>",
           file=f_out)
@@ -225,13 +246,13 @@ def main():
     print("<h4>Covariance of coefficients</h4>", file=f_out)
     print(deaths_param_cov, "<br/>", file=f_out)
 
-    plot_title = "Exponential curve fit to UK reported daily deaths"
+    plot_title = "Line fit to UK reported daily deaths"
     plt.title(plot_title)
     plt.plot(days, daily_deaths, '-', color ='black', label ="Daily deaths")
-    plt.plot(predicted_days, deaths_ans, '--', color ='grey',
+    plt.plot(ln_predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.plot(predicted_days, bl_deaths, '--', color ='green',
-             label="Predicted deaths baseline curve fitted on day 63")
+             label="Predicted deaths baseline curve fitted on day 71")
     plt.legend()
     plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
@@ -243,11 +264,11 @@ def main():
 
 
     # Deaths with log y-scale
-    plot_title = "Exponential curve fit to UK reported daily deaths"
+    plot_title = "Line fit to UK reported daily deaths"
     plot_title += "\n(logarithmic y-scale)"
     plt.title(plot_title)
     plt.plot(days, daily_deaths, '-', color ='black', label ="Daily deaths")
-    plt.plot(predicted_days, deaths_ans, '--', color ='grey',
+    plt.plot(ln_predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.plot(predicted_days, bl_deaths, '--', color ='green',
              label="Predicted deaths baseline curve fitted on day 63")
@@ -260,18 +281,19 @@ def main():
     #plt.show()
     plt.close()
 
-    print("Calculate doubling times for deaths...")
-    dt = doubling_time(daily_deaths, days)
-    plot_title = "Doubling time for UK reported daily deaths"
-    plt.title(plot_title)
-    plt.plot(days, dt, '-', color ='black', label ="Doubling time")
-    plt.legend()
-    plt.grid(True)
-    plt.xlim([doubling_time_start, len(days)])
-    plt.ylabel("Doubling time in Days")
-    plt.xlabel("Days since 31 January 2020")
-    plt.savefig("./out/deathsdt.png")
-    plt.close()
+    # Not relevant any more
+    # print("Calculate doubling times for deaths...")
+    # dt = doubling_time(daily_deaths, days)
+    # plot_title = "Doubling time for UK reported daily deaths"
+    # plt.title(plot_title)
+    # plt.plot(days, dt, '-', color ='black', label ="Doubling time")
+    # plt.legend()
+    # plt.grid(True)
+    # plt.xlim([doubling_time_start, len(days)])
+    # plt.ylabel("Doubling time in Days")
+    # plt.xlabel("Days since 31 January 2020")
+    # plt.savefig("./out/deathsdt.png")
+    # plt.close()
 
     # Estimate best offset and factor to use new daily cases as
     # predictor for deaths

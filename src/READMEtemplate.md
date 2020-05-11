@@ -1,5 +1,6 @@
 # UK COVID-19 Curves
 
+Given the reporting dip every weekend the script now uses a moving 7 day moving average.
 This project contains some Python code that fits exponential curves to
 official UK COVID-19 data that is released daily here: https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
@@ -10,27 +11,19 @@ Since 10 April positive tests have been divided into pillars. This data set only
 this ensures consistency with the previous data and is a better indicator for
 the last graph.
 A green line has been added, this shows the exponential curve calculated using
-the data up to day 56, about a week after lockdown. This estimates what would
+the data up to day 65, the peak. This estimates what would
 have happened without intervention.
 
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
 
-The following graph shows the doubling time for new cases (up is good).
-This is calculated by fitting an exponential curve up to the each date
-and calculating the doubling time from the growth rate.
-![Graph of actual cases and exponential curve](./out/casesdt.png)
-
 These graphs now show all deaths.
 A green line has been added, this shows the exponential curve calculated using
-the data up to day 63, about a two weeks after lockdown. This estimates what  
+the data up to day 71, the peak. This estimates what  
 would have happened without intervention.
 
 ![Graph of actual cases and exponential deaths](./out/deaths.png)
 ![Graph of actual cases and exponential deaths](./out/deaths-log.png)
-
-The following graph shows the doubling time for deaths (up is good).
-![Graph of actual cases and exponential curve](./out/deathsdt.png)
 
 The following graph shows how the daily cases, offset by the stated number of days,
 and  multiplied by the factor (%), mapped against actual deaths reported.
