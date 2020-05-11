@@ -1,7 +1,7 @@
 # UK COVID-19 Curves
 
 Given the reporting dip every weekend the script now uses a moving 7 day moving average.
-This project contains some Python code that used to fits exponential curves to
+This project contains some Python code that used to fit exponential curves to
 official UK COVID-19 data that is released daily here: https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
 The curves have become less relevant every day as the data is fortunately not
@@ -49,4 +49,4 @@ Output Details
 4 18%
 <h4>Average Error</h4>
 34.75
-<br /><br />Last updated on 2020-05-11 10:02:02.668452
+<br /><br />Last updated on 2020-05-11 10:52:18.889140
