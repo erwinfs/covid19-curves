@@ -183,7 +183,7 @@ def main():
     plt.plot(ln_predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
     plt.plot(predicted_days, bl_cases, '--', color ='green',
-             label="Predicted cases baseline curve fitted on day 56")
+             label="Predicted cases baseline curve fitted on day 65")
     plt.legend()
     plt.grid(True)
     plt.xlim([plt_start, len(predicted_days)])
@@ -270,7 +270,7 @@ def main():
     plt.plot(ln_predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.plot(predicted_days, bl_deaths, '--', color ='green',
-             label="Predicted deaths baseline curve fitted on day 63")
+             label="Predicted deaths baseline curve fitted on day 71")
     plt.yscale('log')
     plt.legend()
     plt.grid(True)
