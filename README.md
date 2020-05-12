@@ -36,17 +36,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Line coefficients for new cases</h3>
-[10284.0108407    -80.04877158]
+[10155.98009408   -78.70911176]
 <h4>Covariance of coefficients</h4>
-[[ 1.14137379e+05 -1.33717431e+03]
- [-1.33717431e+03  1.59187417e+01]]
+[[ 1.47111537e+05 -1.71213068e+03]
+ [-1.71213068e+03  2.02619014e+01]]
 <h3>Fit coefficients for daily deaths</h3>
-[1746.4708724   -12.47285079]
+[1828.55852662  -13.33940094]
 <h4>Covariance of coefficients</h4>
-[[ 1.76930433e+03 -2.00246787e+01]
- [-2.00246787e+01  2.28853471e-01]] <br/>
+[[ 1.54518703e+03 -1.73794043e+01]
+ [-1.73794043e+01  1.97493232e-01]] <br/>
 <h3>Best offset and factor for third graph</h3>
 4 18%
 <h4>Average Error</h4>
-34.84
-<br /><br />Last updated on 2020-05-11 15:18:00.678476
+21.27
+<br /><br />Last updated on 2020-05-12 16:17:59.884910

@@ -2,6 +2,3 @@
 #python ./src/download-uk-data.py
 python ./src/curvefit.py
 cat ./src/READMEtemplate.md ./out/fit.md > README.md
-git add .
-git commit -m "Daily run"
-git push

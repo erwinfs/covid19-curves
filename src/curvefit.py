@@ -14,7 +14,7 @@ EXCELDTOFFSET = 18291 # Excel date for start of the data 31 Jan 2020
 LARGENUMBER = 9999999999.9 # Large starting number for err
 
 # Parameters
-data_input_fname = "./data/DailyConfirmedCasesMA.xlsx"
+data_input_fname = "./data/DailyConfirmedCases.xlsx"
 output_fname = "./out/fit.md"
 #  Number of days to predict for
 prediction = 6
@@ -103,8 +103,8 @@ def offset_fit(daily_cases, daily_deaths, days, predicted_days):
                 predicted_deaths[i] = daily_cases[i-offset] * fact
                 # Calculate  of error, sq gives less stable results due to
                 # exponential nature of data
-                error += abs(predicted_deaths[i] - daily_deaths[i])**2
-                # error += abs(predicted_deaths[i] - daily_deaths[i])
+                # error += abs(predicted_deaths[i] - daily_deaths[i])**2
+                error += abs(predicted_deaths[i] - daily_deaths[i])
             if error < lowest_error:
                 lowest_error = error
                 best_offset = offset
@@ -120,8 +120,8 @@ def offset_fit(daily_cases, daily_deaths, days, predicted_days):
     for i in range(best_offset, no_days + offset_prediction):
         deaths_ans[i] = daily_cases[i-best_offset] * best_fact
 
-    error = np.sqrt(lowest_error/(no_days-best_offset))
-    # error = lowest_error/(no_days-best_offset)
+    # error = np.sqrt(lowest_error/(no_days-best_offset))
+    error = lowest_error/(no_days-best_offset)
     return deaths_ans, best_offset, best_fact, error
 
 # Read data from Excel spreadsheet and map it into lists
@@ -133,10 +133,12 @@ def prep_data():
     #convert dates to day number
     days = [d/EXCELDTFACT - EXCELDTOFFSET for d in Dates]
 
-    daily_cases = df["CMODateCountMA"].values.tolist()
+    daily_cases_ma = df["CMODateCount"].rolling(window=7).mean()
+    daily_cases= daily_cases_ma.values.tolist()
     daily_cases = np.nan_to_num(daily_cases)      #Replace NaNs with 0
 
-    daily_deaths = df["DailyDeathsMA"].values.tolist()
+    daily_deaths_ma = df["DailyDeaths"].rolling(window=7).mean()
+    daily_deaths = daily_deaths_ma.values.tolist()
     daily_deaths = np.nan_to_num(daily_deaths)    #Replace NaNs with 0
 
     # Create a new list for days that estimate is to be calculated for
