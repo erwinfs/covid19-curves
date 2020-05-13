@@ -56,13 +56,13 @@ while True:
 
             # Set done (for the day) to true if the page date == today
             # This stops unecessary retrieval of the page
-            if page_date.date() == datetime.now().date() : done = True
+            if page_date.date() == datetime.now().date(): done = True
         else:
             print('Gap in data')
             break
     else:
         print('Spreadsheet is up to date')
-        # done = True
+        if page_date.date() == datetime.now().date(): done = True
 
     # Check at time_between interval between 4 and 8 PM
     if tnow.hour >= start_checking and not done:

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import datetime
 import sys
-from datetime import timedelta
+from datetime import timedelta, datetime
 from scipy.optimize import curve_fit # curve-fit() function imported from scipy
 from matplotlib import pyplot as plt
 
@@ -25,7 +25,7 @@ fact_increment = 0.01
 offset_low = 4
 offset_high = 20
 # Day to start plot at
-plt_start = 45
+plt_start = 51
 # Maximum cases to show on plot
 max_cases_plt = 9000
 max_deaths_plt = 1000
@@ -39,6 +39,7 @@ bl_deaths_param = [0.05535172, 1.14603189]
 # start day for line fit
 cases_ln_start = 65
 deaths_ln_start = 72
+
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
     return a*b**x
@@ -129,9 +130,9 @@ def prep_data():
     # Create a dataframe from xlsx
     df = pd.read_excel(data_input_fname)
 
-    Dates = df["DateVal"].values.tolist()
+    dates = df["DateVal"].values.tolist()
     #convert dates to day number
-    days = [d/EXCELDTFACT - EXCELDTOFFSET for d in Dates]
+    days = [d/EXCELDTFACT - EXCELDTOFFSET for d in dates]
 
     daily_cases_ma = df["CMODateCount"].rolling(window=7).mean()
     daily_cases= daily_cases_ma.values.tolist()
@@ -149,6 +150,19 @@ def prep_data():
 
     return days, daily_cases, daily_deaths, predicted_days
 
+def create_ticks(predicted_days):
+    n = 7 # ticks every n days
+    xd=[]
+    xt=[]
+    start_offset = 3
+    d = datetime(2020, 1, 31) + timedelta(start_offset)
+    for i in range(len(predicted_days)):
+        if i % n == start_offset:
+            xd.append("{}/{}".format(d.date().day, d.date().month))
+            xt.append(i+1)
+            d += timedelta(days = n)
+    return xd, xt
+
 def main():
     # Open output file, use md format to write to it
     f_out = open(output_fname, "w+")
@@ -156,6 +170,8 @@ def main():
     # Read data from input file and create lists
     print("Read data ...")
     days, daily_cases, daily_deaths, predicted_days = prep_data()
+
+    xd, xt = create_ticks(predicted_days)
 
     # Switched from exp curve fit to line fit from peak onwards
     # print("Fit curve to diagnosed cases ...")
@@ -186,10 +202,10 @@ def main():
              label="Predicted cases baseline curve fitted on day 65")
     plt.legend()
     plt.grid(True)
+    plt.xticks(xt, xd, fontsize = "small")
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylim(0, max_cases_plt)
-    plt.ylabel("Daily Cases")
-    plt.xlabel("Days since 31 January 2020")
+    plt.xlabel("Day / Month in 2020")
     plt.savefig("./out/cases.png")
     #plt.show()
     plt.close()
@@ -204,8 +220,9 @@ def main():
              label="Predicted cases baseline curve fitted on day 65")
     plt.legend()
     plt.grid(True)
+    plt.xticks(xt, xd, fontsize = "small")
     plt.xlim([plt_start, len(predicted_days)])
-    plt.xlabel("Days since 31 January 2020")
+    plt.xlabel('Day / Month in 2020')
     plt.yscale('log')
     plt.ylabel("Daily Cases (log)")
     plt.savefig("./out/cases-log.png")
@@ -254,13 +271,13 @@ def main():
              label="Predicted deaths baseline curve fitted on day 71")
     plt.legend()
     plt.grid(True)
+    plt.xticks(xt, xd, fontsize = "small")
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylim(0, max_deaths_plt)
     plt.ylabel("Daily Deaths")
-    plt.xlabel("Days since 31 January 2020")
+    plt.xlabel('Day / Month in 2020')
     plt.savefig("./out/deaths.png")
     plt.close()
-
 
     # Deaths with log y-scale
     plot_title = "Line fit to UK reported daily deaths"
@@ -274,8 +291,10 @@ def main():
     plt.yscale('log')
     plt.legend()
     plt.grid(True)
+    plt.xticks(xt, xd, fontsize = "small")
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Deaths (log)")
+    plt.xlabel("Day / Month in 2020")
     plt.savefig("./out/deaths-log.png")
     #plt.show()
     plt.close()
@@ -315,16 +334,17 @@ def main():
              label ="Predicted deaths")
     plt.legend()
     plt.grid(True)
+    plt.xticks(xt, xd, fontsize = "small")
     plt.xlim([plt_start, len(predicted_days)])
     plt.ylabel("Daily Deaths")
-    plt.xlabel("Days since 31 January 2020")
+    plt.xlabel('Day / Month in 2020')
     plt.savefig("./out/cases-deaths.png")
     #plt.show()
     plt.close()
 
-    print("<br /><br />Last updated on {}".format(datetime.datetime.now()),
+    print("<br /><br />Last updated on {}".format(datetime.now()),
           file=f_out)
-    print("Completed on {}".format(datetime.datetime.now()))
+    print("Completed at {:%H:%M}".format(datetime.now()))
     f_out.close()
 
 if __name__ == '__main__':
