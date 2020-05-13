@@ -14,6 +14,7 @@ data_input_fname = "./data/DailyConfirmedCases.xlsx"
 url = 'https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public'
 
 done = False
+initial_run = True
 while True:
     tnow = datetime.now().time()
     print('Taking a look at {}:{}'.format(tnow.hour, tnow.minute))
@@ -52,7 +53,7 @@ while True:
             print('Running curve_fit', datetime.now())
             returned_value = os.system(cmd)  # returns the exit code in unix
             print('Returned value:', returned_value)
-            done = True
+            if not initial_run: done = True
         else:
             print('Gap in data')
             break
@@ -60,16 +61,18 @@ while True:
         print('Spreadsheet is up to date')
         # done = True
 
+    initial_run = False
+
     # Check at time_between interval between 4 and 8 PM
     h_now = datetime.now().time().hour
     m_now = datetime.now().time().minute
     if h_now >= start_checking and not done:
-        print('It is {}:{} no luck so far try again in {} minutes, done = {}'
+        print('It is {}:{} no luck so far try again in {:.0f} minutes, done = {}'
                 .format(h_now, m_now,time_between/60, done))
         time.sleep(time_between)
     else:
         while h_now < start_checking or done:
-            print('It is {}:{} try again in {:} minutes, done for the day {}'
+            print('It is {}:{} try again in {:.0f} minutes, done for the day {}'
                     .format(h_now, m_now, time_between/60, done))
             time.sleep(time_between)
             h_now = datetime.now().time().hour
