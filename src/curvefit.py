@@ -17,7 +17,7 @@ LARGENUMBER = 9999999999.9 # Large starting number for err
 data_input_fname = "./data/DailyConfirmedCases.xlsx"
 output_fname = "./out/fit.md"
 #  Number of days to predict for
-prediction = 6
+prediction = 10
 # Factor and offset ranges withing which to seek optimum
 fact_low = 0.1
 fact_high = 0.4
@@ -86,7 +86,7 @@ def doubling_time(cases, days):
 
 # Test assumption that on average a fraction of people who were diagnosed
 # an "offset" number of days ealier, die.
-def offset_fit(daily_cases, daily_deaths, days, predicted_days):
+def offset_fit(daily_cases, daily_deaths, days, predicted_days, cases_ans):
     # Iterate over range of offsets and factors - brute force approach
     no_days = len(days)
     predicted_deaths = [0] * no_days
@@ -120,6 +120,11 @@ def offset_fit(daily_cases, daily_deaths, days, predicted_days):
     deaths_ans = [0.0] * (no_days + prediction)
     for i in range(best_offset, no_days + offset_prediction):
         deaths_ans[i] = daily_cases[i-best_offset] * best_fact
+
+    # Add in linear projection when you run out of actual cases data
+    # Remember that cases_ans starts at cases_ln_start
+    for i in range(no_days + offset_prediction, no_days + prediction):
+        deaths_ans[i] = cases_ans[i-best_offset - cases_ln_start] * best_fact
 
     # error = np.sqrt(lowest_error/(no_days-best_offset))
     error = lowest_error/(no_days-best_offset)
@@ -177,6 +182,7 @@ def main():
     # print("Fit curve to diagnosed cases ...")
     # cases_ans, cases_param, cases_param_cov = exp_fit(daily_cases, days,
     #                                                     predicted_days)
+
     print("Fit line to diagnosed cases ...")
     ln_cases = daily_cases[cases_ln_start:]
     ln_days = days[cases_ln_start:]
@@ -247,13 +253,13 @@ def main():
     # print("Fit curve to new deaths ...")
     # deaths_ans, deaths_param, deaths_param_cov = exp_fit(daily_deaths, days,
     #                                                       predicted_days)
+
     print("Fit line to deaths ...")
     ln_deaths = daily_deaths[deaths_ln_start:]
     ln_days = days[deaths_ln_start:]
     ln_predicted_days = predicted_days[deaths_ln_start:]
     deaths_ans, deaths_param, deaths_param_cov = line_fit(ln_deaths, ln_days,
                                                     ln_predicted_days)
-
 
     bl_deaths=(bl_deaths_param[0]*bl_deaths_param[1]**np.array(predicted_days))
     print("<h3>Fit coefficients for daily deaths</h3>",
@@ -317,7 +323,7 @@ def main():
     # predictor for deaths
     print("Predict deaths based on new cases ...")
     deaths_ans, offset, fact, error = offset_fit(daily_cases, daily_deaths,
-                                                  days, predicted_days)
+                                            days, predicted_days, cases_ans)
     print("<h3>Best offset and factor for third graph</h3>", file=f_out)
     print (offset, "{:,.0f}%".format(fact *100), file=f_out)
     #print(bestOffset, bestFact)
