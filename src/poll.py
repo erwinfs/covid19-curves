@@ -35,8 +35,12 @@ while True:
     # Find date of data NB: This section is very dependant on website
     date_str = page.partition('Number of cases and deaths')[2]
     date_str = date_str.partition('As of')[2]
-    date_str = date_str.partition('on')[2].partition(',')[0].strip()
+    print(date_str)
+    # date_str = date_str.partition('on')[2].partition(',')[0].strip()
+    date_str = date_str.partition('9am')[2].partition(',')[0].strip()
+    print(date_str)
     date_str += ' ' + str(datetime.today().year)
+    print(date_str)
     page_date = datetime.strptime(date_str, '%d %B %Y')
 
     # If the last dat in the spreadsheet is smaller than the date
