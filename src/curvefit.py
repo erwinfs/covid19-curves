@@ -192,11 +192,12 @@ def main():
                                                         ln_predicted_days)
     print(bl_cases_param)
     bl_cases = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
-    print("<h3>Line coefficients for new cases</h3>",
+    print("<h3>Fitcoefficients for new cases</h3>",
           file=f_out)
     print(cases_param, file=f_out)
-    print("<h4>Covariance of coefficients</h4>", file=f_out)
-    print(cases_param_cov, np.sqrt(np.diag(cases_param_cov)), file=f_out)
+    print("<h4>Standard deviation errors on the parameters</h4>", file=f_out)
+    print(np.sqrt(np.diag(cases_param_cov)), file=f_out)
+
     print("Baseline parameters:", bl_cases_param)
 
     # Plot results
@@ -266,8 +267,9 @@ def main():
     print("<h3>Fit coefficients for daily deaths</h3>",
           file=f_out)
     print(deaths_param,file=f_out)
-    print("<h4>Covariance of coefficients</h4>", file=f_out)
-    print(deaths_param_cov, "<br/>", file=f_out)
+    print("<h4>Standard deviation errors on the parameters</h4>", file=f_out)
+    print(np.sqrt(np.diag(deaths_param_cov), "<br/>", file=f_out)
+
 
     plot_title = "Curve fit to UK reported daily deaths"
     plt.title(plot_title)
