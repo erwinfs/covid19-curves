@@ -1,13 +1,13 @@
 <h3>Fit coefficients for new cases</h3>
-[1.47572623e+05 9.66009373e-01]
+[1.46710935e+05 9.66061544e-01]
 <h4>Standard deviation errors on the parameters</h4>
-[7.77659102e+03 4.54164488e-04]
+[7.69016804e+03 4.51556422e-04]
 <h3>Fit coefficients for daily deaths</h3>
-[8.72255925e+03 9.72060961e-01]
+[8.71952332e+03 9.72064767e-01]
 <h4>Standard deviation errors on the parameters</h4>
-[3.05304394e+02 3.61953183e-04] <br/>
+[3.02537335e+02 3.58663423e-04] <br/>
 <h3>Best offset and factor for third graph</h3>
 4 13%
 <h4>Average Error</h4>
-65.48
-<br /><br />Last updated on 2020-07-14 11:43:04.920235
+65.14
+<br /><br />Last updated on 2020-07-14 17:52:02.975945
