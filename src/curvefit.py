@@ -37,7 +37,7 @@ bl_cases_param = [0.69071121, 1.14232115]
 # Day 71, peak of deaths (and 6 days after peak of new cases)
 bl_deaths_param = [0.05535172, 1.14603189]
 # start day for line fit
-cases_ln_start = 75
+cases_ln_start = 100
 deaths_ln_start = 75
 
 # Test exponential function with coefficients as parameters
@@ -192,7 +192,7 @@ def main():
                                                         ln_predicted_days)
     print(bl_cases_param)
     bl_cases = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
-    print("<h3>Fitcoefficients for new cases</h3>",
+    print("<h3>Fit coefficients for new cases</h3>",
           file=f_out)
     print(cases_param, file=f_out)
     print("<h4>Standard deviation errors on the parameters</h4>", file=f_out)
