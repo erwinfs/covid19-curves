@@ -27,7 +27,7 @@ offset_high = 20
 # Day to start plot at
 plt_start = 51
 # Maximum cases to show on plot
-max_cases_plt = 9000
+max_cases_plt = 6000
 max_deaths_plt = 1000
 # Day to start doubliong time calc and plot
 doubling_time_start = 50  # Day to start doubliong time calc and plot
