@@ -34,9 +34,9 @@ tests, rather than just Pillar 1 has made this approach less accurate.
 Output Details
 --------------
 <h3>Fit coefficients for new cases</h3>
-[1.45505248e+05 9.66119898e-01]
+[1.47572623e+05 9.66009373e-01]
 <h4>Standard deviation errors on the parameters</h4>
-[8.06856361e+03 4.73776985e-04]
+[7.77659102e+03 4.54164488e-04]
 <h3>Fit coefficients for daily deaths</h3>
 [8.72255925e+03 9.72060961e-01]
 <h4>Standard deviation errors on the parameters</h4>
@@ -45,4 +45,4 @@ Output Details
 4 13%
 <h4>Average Error</h4>
 65.48
-<br /><br />Last updated on 2020-07-14 11:09:52.616358
+<br /><br />Last updated on 2020-07-14 11:11:14.328429
