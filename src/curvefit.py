@@ -37,7 +37,7 @@ bl_cases_param = [0.69071121, 1.14232115]
 # Day 71, peak of deaths (and 6 days after peak of new cases)
 bl_deaths_param = [0.05535172, 1.14603189]
 # start day for line fit
-cases_ln_start = 100
+cases_ln_start = 98
 deaths_ln_start = 75
 
 # Test exponential function with coefficients as parameters
