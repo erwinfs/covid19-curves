@@ -268,7 +268,7 @@ def main():
           file=f_out)
     print(deaths_param,file=f_out)
     print("<h4>Standard deviation errors on the parameters</h4>", file=f_out)
-    print(np.sqrt(np.diag(deaths_param_cov), "<br/>", file=f_out)
+    print(np.sqrt(np.diag(deaths_param_cov)), "<br/>", file=f_out)
 
 
     plot_title = "Curve fit to UK reported daily deaths"
