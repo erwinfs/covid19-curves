@@ -17,7 +17,7 @@ LARGENUMBER = 9999999999.9 # Large starting number for err
 data_input_fname = "./data/DailyConfirmedCases.xlsx"
 output_fname = "./out/fit.md"
 #  Number of days to predict for
-prediction = 14
+prediction = 30
 # Factor and offset ranges withing which to seek optimum
 fact_low = 0.1
 fact_high = 0.4

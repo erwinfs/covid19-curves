@@ -17,9 +17,8 @@ The blue line shows the exponential curve fitted starting on 7 May.
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
 
 These graphs now show all deaths.
-A green line shows the exponential curve calculated using
-the data up to day 71, the peak. This estimates what  
-would have happened without intervention.
+A green line shows the exponential curve calculated using the data up to day 71, the peak.
+This estimates what would have happened without intervention.
 The blue line shows the exponential curve fitted starting on 15 April.
 
 ![Graph of actual cases and exponential deaths](./out/deaths.png)
@@ -47,4 +46,4 @@ Output Details
 4 13%
 <h4>Average Error</h4>
 65.48
-<br /><br />Last updated on 2020-07-14 11:15:38.605218
+<br /><br />Last updated on 2020-07-14 11:39:53.333634
