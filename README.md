@@ -8,17 +8,19 @@ Given the reporting dip every weekend the script now uses a moving 7 day moving 
 This project contains some Python code that used to fit exponential curves to
 official UK COVID-19 data that is released daily here: https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
-A green line has been added, this shows the exponential curve calculated using
+A green line shows the exponential curve calculated using
 the data up to day 65, the peak. This estimates what would
 have happened without intervention.
+The blue line shows the exponential curve fitted starting on 7 May.
 
 ![Graph of actual cases and exponential curve](./out/cases.png)
 ![Graph of actual cases and exponential curve](./out/cases-log.png)
 
 These graphs now show all deaths.
-A green line has been added, this shows the exponential curve calculated using
+A green line shows the exponential curve calculated using
 the data up to day 71, the peak. This estimates what  
 would have happened without intervention.
+The blue line shows the exponential curve fitted starting on 15 April.
 
 ![Graph of actual cases and exponential deaths](./out/deaths.png)
 ![Graph of actual cases and exponential deaths](./out/deaths-log.png)
@@ -45,4 +47,4 @@ Output Details
 4 13%
 <h4>Average Error</h4>
 65.48
-<br /><br />Last updated on 2020-07-14 11:11:14.328429
+<br /><br />Last updated on 2020-07-14 11:15:38.605218
