@@ -29,18 +29,18 @@ while True:
     dfl = pd.read_html(page)
 
     # Read deaths and Pillar 1 positive tests NB: Dependant on table struct
-    new_deaths = dfl[0]['Deaths in all settings'][0]
-    new_cases = dfl[1]['Pillar 1'][2]
+    new_deaths = dfl[0]['Daily'][0]
+    new_cases = dfl[1]['Daily'][0]
 
     # Find date of data NB: This section is very dependant on website
-    date_str = page.partition('Number of cases and deaths')[2]
+    date_str = page.partition('Positive cases')[2]
     date_str = date_str.partition('As of')[2]
-    print(date_str)
     # date_str = date_str.partition('on')[2].partition(',')[0].strip()
     date_str = date_str.partition('9am')[2].partition(',')[0].strip()
-    print(date_str)
+    # Make provision that they sometimnes omit the 'on'
+    if (date_str[0] == 'o'):
+        date_str = date_str.partition('on')[2].partition(',')[0].strip()
     date_str += ' ' + str(datetime.today().year)
-    print(date_str)
     page_date = datetime.strptime(date_str, '%d %B %Y')
 
     # If the last dat in the spreadsheet is smaller than the date

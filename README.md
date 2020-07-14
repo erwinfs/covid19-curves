@@ -5,8 +5,7 @@ This project contains some Python code that used to fit exponential curves to
 official UK COVID-19 data that is released daily here: https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
 The curves have become less relevant every day as the data is fortunately not
-following an exponential curve any more. Therefore a new line fit was introduced
-on 11 May.
+following an exponential curve any more. Changed the line fit for the decrease (introduced 11 May) with exponential curves starting on day 75.
 
 Since 10 April positive tests have been divided into pillars. This data set only uses Pillar 1 -  just people that have been hospitalised and most critical key workers,
 this ensures consistency with the previous data and is a better indicator for
@@ -36,17 +35,17 @@ It is the combination that produces the lowest error.
 Output Details
 --------------
 <h3>Line coefficients for new cases</h3>
-[10202.53568242   -79.50756512]
+[3.31434559e+04 9.78183748e-01]
 <h4>Covariance of coefficients</h4>
-[[ 4.34918728e+04 -4.48927824e+02]
- [-4.48927824e+02  4.77582792e+00]]
+[[ 8.51948864e+06 -2.51114556e+00]
+ [-2.51114556e+00  7.68418015e-07]] [2.91881631e+03 8.76594556e-04]
 <h3>Fit coefficients for daily deaths</h3>
-[1796.30165667  -12.96643457]
+[8.72255925e+03 9.72060961e-01]
 <h4>Covariance of coefficients</h4>
-[[ 3.58546680e+02 -3.59856927e+00]
- [-3.59856927e+00  3.69084026e-02]] <br/>
+[[ 9.32107729e+04 -1.08859637e-01]
+ [-1.08859637e-01  1.31010107e-07]] <br/>
 <h3>Best offset and factor for third graph</h3>
-4 18%
+4 13%
 <h4>Average Error</h4>
-30.33
-<br /><br />Last updated on 2020-06-01 08:56:47.327141
+65.48
+<br /><br />Last updated on 2020-07-14 09:54:49.305980

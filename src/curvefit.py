@@ -17,7 +17,7 @@ LARGENUMBER = 9999999999.9 # Large starting number for err
 data_input_fname = "./data/DailyConfirmedCases.xlsx"
 output_fname = "./out/fit.md"
 #  Number of days to predict for
-prediction = 10
+prediction = 14
 # Factor and offset ranges withing which to seek optimum
 fact_low = 0.1
 fact_high = 0.4
@@ -37,8 +37,8 @@ bl_cases_param = [0.69071121, 1.14232115]
 # Day 71, peak of deaths (and 6 days after peak of new cases)
 bl_deaths_param = [0.05535172, 1.14603189]
 # start day for line fit
-cases_ln_start = 65
-deaths_ln_start = 72
+cases_ln_start = 75
+deaths_ln_start = 75
 
 # Test exponential function with coefficients as parameters
 def test(x, a, b):
@@ -72,6 +72,7 @@ def line_fit(cases, days, predicted_days):
     ans = np.array([line_calc(i) for i in predicted_days])
     return ans, param, param_cov
 
+# Not used at the moment
 def doubling_time(cases, days):
     dt = [0.0] * len(days)
     for i in range(doubling_time_start-1,len(days)):
@@ -187,7 +188,7 @@ def main():
     ln_cases = daily_cases[cases_ln_start:]
     ln_days = days[cases_ln_start:]
     ln_predicted_days = predicted_days[cases_ln_start:]
-    cases_ans, cases_param, cases_param_cov = line_fit(ln_cases, ln_days,
+    cases_ans, cases_param, cases_param_cov = exp_fit(ln_cases, ln_days,
                                                         ln_predicted_days)
     print(bl_cases_param)
     bl_cases = (bl_cases_param[0]*bl_cases_param[1]**np.array(predicted_days))
@@ -195,17 +196,17 @@ def main():
           file=f_out)
     print(cases_param, file=f_out)
     print("<h4>Covariance of coefficients</h4>", file=f_out)
-    print(cases_param_cov, file=f_out)
+    print(cases_param_cov, np.sqrt(np.diag(cases_param_cov)), file=f_out)
     print("Baseline parameters:", bl_cases_param)
 
     # Plot results
-    plot_title = "Line fit to UK reported daily cases"
+    plot_title = "Curve fit to UK reported daily cases"
     plt.title(plot_title)
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
     plt.plot(ln_predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
     plt.plot(predicted_days, bl_cases, '--', color ='green',
-             label="Predicted cases baseline curve fitted on day 65")
+             label="Predicted cases up to day 65")
     plt.legend()
     plt.grid(True)
     plt.xticks(xt, xd, fontsize = "small")
@@ -216,14 +217,14 @@ def main():
     #plt.show()
     plt.close()
 
-    plot_title = "Line fit to UK reported daily cases"
+    plot_title = "Curve fit to UK reported daily cases"
     plot_title + "\n(logarithmic y-scale)"
     plt.title(plot_title)
     plt.plot(days, daily_cases, '-', color ='red', label ="Daily cases")
     plt.plot(ln_predicted_days, cases_ans, '--', color ='blue',
              label="Predicted cases")
     plt.plot(predicted_days, bl_cases, '--', color ='green',
-             label="Predicted cases baseline curve fitted on day 65")
+             label="Predicted cases up to day 65")
     plt.legend()
     plt.grid(True)
     plt.xticks(xt, xd, fontsize = "small")
@@ -254,11 +255,11 @@ def main():
     # deaths_ans, deaths_param, deaths_param_cov = exp_fit(daily_deaths, days,
     #                                                       predicted_days)
 
-    print("Fit line to deaths ...")
+    print("Fit curve to deaths ...")
     ln_deaths = daily_deaths[deaths_ln_start:]
     ln_days = days[deaths_ln_start:]
     ln_predicted_days = predicted_days[deaths_ln_start:]
-    deaths_ans, deaths_param, deaths_param_cov = line_fit(ln_deaths, ln_days,
+    deaths_ans, deaths_param, deaths_param_cov = exp_fit(ln_deaths, ln_days,
                                                     ln_predicted_days)
 
     bl_deaths=(bl_deaths_param[0]*bl_deaths_param[1]**np.array(predicted_days))
@@ -268,13 +269,13 @@ def main():
     print("<h4>Covariance of coefficients</h4>", file=f_out)
     print(deaths_param_cov, "<br/>", file=f_out)
 
-    plot_title = "Line fit to UK reported daily deaths"
+    plot_title = "Curve fit to UK reported daily deaths"
     plt.title(plot_title)
     plt.plot(days, daily_deaths, '-', color ='black', label ="Daily deaths")
     plt.plot(ln_predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.plot(predicted_days, bl_deaths, '--', color ='green',
-             label="Predicted deaths baseline curve fitted on day 71")
+             label="Predicted up to day 71")
     plt.legend()
     plt.grid(True)
     plt.xticks(xt, xd, fontsize = "small")
@@ -286,14 +287,14 @@ def main():
     plt.close()
 
     # Deaths with log y-scale
-    plot_title = "Line fit to UK reported daily deaths"
+    plot_title = "Curve fit to UK reported daily deaths"
     plot_title += "\n(logarithmic y-scale)"
     plt.title(plot_title)
     plt.plot(days, daily_deaths, '-', color ='black', label ="Daily deaths")
     plt.plot(ln_predicted_days, deaths_ans, '--', color ='grey',
              label ="Predicted deaths")
     plt.plot(predicted_days, bl_deaths, '--', color ='green',
-             label="Predicted deaths baseline curve fitted on day 71")
+             label="Predicted deaths up to day 71")
     plt.yscale('log')
     plt.legend()
     plt.grid(True)
